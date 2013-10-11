@@ -11,11 +11,17 @@
       .better-placeholder {
         transition: all .2s ease;
       }
+      .better-placeholder.better-placeholder-active {
+        padding: 34px 12px 16px 12px;
+      }
       .better-placeholder-text {
-        font-size: 10px;
         position: absolute;
-        top: 5px;
-        left: 28px;
+        top: 5px; left: 28px;
+        font-size: 10px;
+        font-weight: bold;
+      }
+      .better-placeholder-text.active {
+        opacity: 1;
       }
     </style>
 
