@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>angular-better-placeholders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
+    <style>
+      .better-placeholder {
+        transition: all .2s ease;
+      }
+      .better-placeholder-text {
+        font-size: 10px;
+        position: absolute;
+        top: 5px;
+        left: 28px;
+      }
+    </style>
+
+  </head>
+  <body ng-app="PlaceholderDemoApp">
+
+    <div ng-view></div>
+
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/Main.js"></script>
+    <script src="scripts/directives/angular-better-placeholder.js"></script>
+
+</body>
+</html>
