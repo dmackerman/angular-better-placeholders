@@ -1,0 +1,21 @@
+{
+  "name": "angular-better-placeholders",
+  "version": "0.1.0",
+  "authors": [
+    "Dave Ackerman <dave@moduscreate.com>"
+  ],
+  "description": "Better placeholder interaction for inputs only using placeholders. Built on top of Bootstrap forms.",
+  "keywords": [
+    "angular",
+    "forms",
+    "placeholder"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
