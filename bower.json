@@ -4,11 +4,13 @@
   "authors": [
     "Dave Ackerman <dave@moduscreate.com>"
   ],
-  "description": "Better placeholder interaction for inputs only using placeholders. Built on top of Bootstrap forms.",
+  "main": "src/angular-better-placeholders.js",
+  "description": "Angular directive for enhanced placeholders that integrate with Bootstrap form fields.",
   "keywords": [
     "angular",
     "forms",
-    "placeholder"
+    "placeholder",
+    "bootstrap"
   ],
   "license": "MIT",
   "ignore": [
