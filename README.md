@@ -7,6 +7,11 @@ http://dribbble.com/shots/1254439--GIF-Mobile-Form-Interaction?list=users
 
 [Check out the website](http://dmackerman.github.io/angular-better-placeholders/#/)
 
+## Installation
+``` bash
+$ bower install angular-better-placeholders
+```
+
 
 ## Usage
 Simple include the `better-place-holder` directive as a class on your input fields.
@@ -33,8 +38,8 @@ Include the following CSS snipets:
 ```    
 
 ## Todo
-- fix bower package
 - probably shouldn't be a class directive, an attribute instead?
+- create a module
 
 ## Example
 - http://dmackerman.github.io/angular-better-placeholders/
