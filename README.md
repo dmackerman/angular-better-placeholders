@@ -9,8 +9,32 @@ http://dribbble.com/shots/1254439--GIF-Mobile-Form-Interaction?list=users
 
 
 ## Usage
+Simple include the `better-place-holder` directive as a class on your input fields.
 
-- fix bower things
+``` html
+<input type="text" ng-model="user.firstName" class="form-control better-placeholder" placeholder="First Name" />
+```
+
+Include the following CSS snipets:
+
+``` css
+.better-placeholder {
+  transition: all .2s ease;
+}
+.better-placeholder.better-placeholder-active {
+  padding: 34px 12px 16px 12px;
+}
+.better-placeholder-text {
+  position: absolute;
+  top: 5px; left: 28px;
+  font-size: 10px;
+  font-weight: bold;
+}
+```    
+
+## Todo
+- fix bower package
+- probably shouldn't be a class directive, an attribute instead?
 
 ## Example
 - http://dmackerman.github.io/angular-better-placeholders/
