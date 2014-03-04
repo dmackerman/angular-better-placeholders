@@ -13,7 +13,4 @@ http://dribbble.com/shots/1254439--GIF-Mobile-Form-Interaction?list=users
 - fix bower things
 
 ## Example
-
-
-## TODO
-- tests?
+- http://dmackerman.github.io/angular-better-placeholders/
