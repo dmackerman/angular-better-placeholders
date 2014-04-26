@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/dmackerman/angular-better-placeholders.png?label=ready&title=Ready)](https://waffle.io/dmackerman/angular-better-placeholders)
 # Angular Better Placeholders
 
 An [AngularJS](http://angularjs.org/) directive to improve `input` placeholders. Based on a concept found on Dribble:
