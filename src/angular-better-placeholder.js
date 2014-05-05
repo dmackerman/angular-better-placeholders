@@ -1,36 +1,38 @@
-'use strict';
-
-angular.module('PlaceholderDemoApp')
-  .directive('betterPlaceholder', function() {
-    return {
-      restrict: 'C',
-      require: 'ngModel',
-      link: function(scope, element, attrs, ngModel) {
-        var origPlaceholderText = attrs.placeholder;
-        var placeholder = '<span class=\"help-block better-placeholder-text\">' + attrs.placeholder + '</span>';
-
-        // watch our model for changes
-        scope.$watch(attrs.ngModel, function(newValue, oldValue) {
-          if (newValue === oldValue) {
-            return;
-          }
-          else if (newValue == "") {
-            element.attr('placeholder', '');
-          }
-          else if (!element.hasClass('better-placeholder-active')) {
-            element.before(placeholder)
-            element.addClass('better-placeholder-active');
-          }
-        });
-
-        // remove the placeholder, and set the default placeholde to blank since we already have one
-        element.on('blur', function() {
-          if (element.val() == "") {
-            element.prev().remove();
-            element.removeClass('better-placeholder-active');
-            element.attr('placeholder', origPlaceholderText);
-          }
-        });
-      }
+angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', function() {
+  return {
+    restrict: 'C',
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      var activate, deactivate, modelChange, placeholder;
+      placeholder = angular.element("<span class='help-block better-placeholder-text'>" + attrs.placeholder + "</span>");
+      element.after(placeholder);
+      placeholder.on('click', function() {
+        return element[0].focus();
+      });
+      activate = function() {
+        element.addClass('better-placeholder-active');
+        return placeholder.addClass('active');
+      };
+      deactivate = function() {
+        if (ngModel.$isEmpty(ngModel.$viewValue)) {
+          element.removeClass('better-placeholder-active');
+          return placeholder.removeClass('active');
+        }
+      };
+      modelChange = function(value) {
+        if (ngModel.$isEmpty(value)) {
+          element.removeClass('better-placeholder-active');
+          placeholder.removeClass('active');
+        } else {
+          element.addClass('better-placeholder-active');
+          placeholder.addClass('active');
+        }
+        return value;
+      };
+      element.on('focus', activate);
+      element.on('blur', deactivate);
+      element.on('change', modelChange);
+      return ngModel.$formatters.push(modelChange);
     }
-  })
+  };
+});
