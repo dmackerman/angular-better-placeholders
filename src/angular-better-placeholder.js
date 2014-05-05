@@ -2,9 +2,22 @@ angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', fu
   return {
     restrict: 'C',
     require: 'ngModel',
+    scope: true,
     link: function(scope, element, attrs, ngModel) {
       var activate, deactivate, modelChange, placeholder;
-      placeholder = angular.element("<span class='help-block better-placeholder-text'>" + attrs.placeholder + "</span>");
+      if (attrs.ngPlaceholder != null) {
+        scope.placeholder = scope.$parent.$eval(attrs.ngPlaceholder);
+        element.attr('placeholder', scope.placeholder);
+        scope.$parent.$watch(attrs.ngPlaceholder, function(val) {
+          element.attr('placeholder', val);
+          return placeholder.html(val);
+        });
+      } else if ((attrs.placeholder != null) && attrs.placeholder !== '') {
+        scope.placeholder = attrs.placeholder;
+      } else {
+        throw "better-placeholder requires an ng-placeholder or placeholder attribute";
+      }
+      placeholder = angular.element("<span class='help-block better-placeholder-text'>" + scope.placeholder + "</span>");
       element.after(placeholder);
       placeholder.on('click', function() {
         return element[0].focus();

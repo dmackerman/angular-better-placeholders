@@ -2,8 +2,18 @@ angular.module('angularBetterPlaceholder', [])
 .directive 'betterPlaceholder', ->
 	restrict: 'C'
 	require: 'ngModel'
+	scope: true
 	link: (scope, element, attrs, ngModel) ->
-		placeholder = angular.element "<span class='help-block better-placeholder-text'>#{attrs.placeholder}</span>"
+		if attrs.ngPlaceholder?
+			scope.placeholder = scope.$parent.$eval attrs.ngPlaceholder
+			element.attr 'placeholder', scope.placeholder
+			scope.$parent.$watch attrs.ngPlaceholder, (val) ->
+				element.attr 'placeholder', val
+				placeholder.html val
+		else if attrs.placeholder? and attrs.placeholder isnt '' then scope.placeholder = attrs.placeholder
+		else throw "better-placeholder requires an ng-placeholder or placeholder attribute"
+		
+		placeholder = angular.element "<span class='help-block better-placeholder-text'>#{scope.placeholder}</span>"
 		element.after placeholder
 		placeholder.on 'click', -> element[0].focus()
 		activate = ->
