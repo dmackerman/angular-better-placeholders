@@ -56,6 +56,24 @@ Include the following CSS snipets:
   padding: 18px 12px 6px 12px;
   height: auto;
 }
+.has-error .better-placeholder-text {
+  color: #a94442;
+}
+.has-error .better-placeholder-text.active {
+  color: #a94442;
+}
+.has-success .better-placeholder-text {
+  color: #3c763d;
+}
+.has-success .better-placeholder-text.active {
+  color: #3c763d;
+}
+.has-warning .better-placeholder-text {
+  color: #8a6d3b;
+}
+.has-warning .better-placeholder-text.active {
+  color: #8a6d3b;
+}
 .better-placeholder-text {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -76,7 +94,7 @@ Include the following CSS snipets:
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-.active {
+.better-placeholder-text.active {
   max-width: 110%;
   visibility: visible;
   -webkit-transform: scale(0.8);
