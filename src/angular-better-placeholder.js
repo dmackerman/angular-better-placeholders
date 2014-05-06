@@ -1,10 +1,16 @@
 angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', function() {
   return {
     restrict: 'C',
-    require: 'ngModel',
-    scope: true,
+    require: '?ngModel',
+    scope: {},
     link: function(scope, element, attrs, ngModel) {
-      var activate, deactivate, modelChange, placeholder;
+      var activate, deactivate, isEmpty, placeholder;
+      isEmpty = function(value) {
+        if (value == null) {
+          value = ngModel != null ? ngModel.$viewValue : element.val();
+        }
+        return ((ngModel != null) && ngModel.$isEmpty(value)) || ((ngModel == null) && (!value || value === ''));
+      };
       if (attrs.ngPlaceholder != null) {
         scope.placeholder = scope.$parent.$eval(attrs.ngPlaceholder);
         element.attr('placeholder', scope.placeholder);
@@ -27,25 +33,36 @@ angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', fu
         return placeholder.addClass('active');
       };
       deactivate = function() {
-        if (ngModel.$isEmpty(ngModel.$viewValue)) {
+        if (isEmpty()) {
           element.removeClass('better-placeholder-active');
           return placeholder.removeClass('active');
         }
       };
-      modelChange = function(value) {
-        if (ngModel.$isEmpty(value)) {
-          element.removeClass('better-placeholder-active');
-          placeholder.removeClass('active');
-        } else {
-          element.addClass('better-placeholder-active');
-          placeholder.addClass('active');
-        }
-        return value;
-      };
       element.on('focus', activate);
       element.on('blur', deactivate);
-      element.on('change', modelChange);
-      return ngModel.$formatters.push(modelChange);
+      element.on('change', function() {
+        if (isEmpty()) {
+          element.removeClass('better-placeholder-active');
+          return placeholder.removeClass('active');
+        } else {
+          element.addClass('better-placeholder-active');
+          return placeholder.addClass('active');
+        }
+      });
+      if (ngModel != null) {
+        return ngModel.$formatters.push(function(value) {
+          if (isEmpty(value)) {
+            element.removeClass('better-placeholder-active');
+            placeholder.removeClass('active');
+          } else {
+            element.addClass('better-placeholder-active');
+            placeholder.addClass('active');
+          }
+          return value;
+        });
+      } else if (!isEmpty()) {
+        return activate();
+      }
     }
   };
 });
