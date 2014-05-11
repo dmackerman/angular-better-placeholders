@@ -7,9 +7,9 @@ angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', fu
       var activate, deactivate, isEmpty, placeholder;
       isEmpty = function(value) {
         if (value == null) {
-          value = ngModel != null ? ngModel.$viewValue : element.val();
+          value = ngModel && (ngModel != null) ? ngModel.$viewValue : element.val();
         }
-        return ((ngModel != null) && ngModel.$isEmpty(value)) || ((ngModel == null) && (!value || value === ''));
+        return !value || value === '';
       };
       if (attrs.ngPlaceholder != null) {
         scope.placeholder = scope.$parent.$eval(attrs.ngPlaceholder);

@@ -4,7 +4,7 @@ angular.module('angularBetterPlaceholder', [])
 	require: '?ngModel'
 	scope: {}
 	link: (scope, element, attrs, ngModel) ->
-		isEmpty = (value= if ngModel? then ngModel.$viewValue else element.val()) -> (ngModel? and ngModel.$isEmpty value) or (not ngModel? and (not value or value is ''))
+		isEmpty = (value= if ngModel and ngModel? then ngModel.$viewValue else element.val()) -> (not value or value is '')
 		if attrs.ngPlaceholder?
 			scope.placeholder = scope.$parent.$eval attrs.ngPlaceholder
 			element.attr 'placeholder', scope.placeholder

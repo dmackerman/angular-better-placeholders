@@ -2,5 +2,5 @@
 
 angular.module('PlaceholderDemoApp')
   .controller('MainCtrl', function MainCtrl($scope)  {
-
+	  $scope.user = {}
   })

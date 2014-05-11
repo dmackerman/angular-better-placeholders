@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('PlaceholderDemoApp', [])
+var app = angular.module('PlaceholderDemoApp', ['angularBetterPlaceholder'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
