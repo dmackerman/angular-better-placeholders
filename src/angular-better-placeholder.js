@@ -9,7 +9,7 @@ angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', fu
         if (value == null) {
           value = ngModel && (ngModel != null) ? ngModel.$viewValue : element.val();
         }
-        return !value || value === '';
+        return !element[0].validity.badInput && (!value || value === '');
       };
       if (attrs.ngPlaceholder != null) {
         scope.placeholder = scope.$parent.$eval(attrs.ngPlaceholder);

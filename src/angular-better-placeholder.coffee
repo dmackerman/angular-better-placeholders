@@ -1,10 +1,11 @@
+# Compile with coffee -c -b --no-header angular-better-placeholder.coffee > angular-better-placeholder.js
 angular.module('angularBetterPlaceholder', [])
 .directive 'betterPlaceholder', ->
 	restrict: 'C'
 	require: '?ngModel'
 	scope: {}
 	link: (scope, element, attrs, ngModel) ->
-		isEmpty = (value= if ngModel and ngModel? then ngModel.$viewValue else element.val()) -> (not value or value is '')
+		isEmpty = (value= if ngModel and ngModel? then ngModel.$viewValue else element.val()) -> (not element[0].validity.badInput and (not value or value is ''))
 		if attrs.ngPlaceholder?
 			scope.placeholder = scope.$parent.$eval attrs.ngPlaceholder
 			element.attr 'placeholder', scope.placeholder
