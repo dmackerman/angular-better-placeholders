@@ -2,7 +2,6 @@ angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', fu
   return {
     restrict: 'C',
     require: '?ngModel',
-    scope: {},
     link: function(scope, element, attrs, ngModel) {
       var activate, deactivate, isEmpty, placeholder;
       isEmpty = function(value) {
