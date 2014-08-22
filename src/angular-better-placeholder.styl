@@ -1,0 +1,98 @@
+// compile with stylus -u autoprefixer-stylus -c angular-better-placeholder.styl
+
+.better-placeholder
+	transition all default-transition-duration ease
+	&::placeholder
+		opacity 0
+	&::-webkit-datetime-edit
+		transition all default-transition-duration ease
+		opacity 0
+	&:focus
+		padding-top 18px
+		height auto
+		&::-webkit-datetime-edit
+			opacity 1
+	&.fixed-height
+		padding-top 18px
+		height auto
+		&:not(:focus):not(.better-placeholder-active) ~ .better-placeholder-text:not(.active)
+			top 14px
+
+.better-placeholder-active, .ui-select-bootstrap.dropdown.open .better-placeholder
+	padding-top 18px
+	height auto
+	&::-webkit-datetime-edit
+		opacity 1
+	&::placeholder
+		opacity 0
+
+.input-group .better-placeholder ~ .input-group-btn .btn, .better-placeholder-button .btn
+	transition all default-transition-duration ease
+.input-group .better-placeholder-active ~ .input-group-btn .btn, .better-placeholder-button-active .btn
+	padding 12px
+
+.dropdown-menu .better-placeholder-text
+	z-index 1000
+.better-placeholder-text, .help-block.better-placeholder-text
+	z-index 10
+	transition all default-transition-duration ease
+	position absolute
+	top 2px
+	margin-left 12px
+	line-height 20px
+	height 20px
+	color placeholder
+	transform-origin 0 0
+	max-width 85%
+	margin-right 12px
+	white-space nowrap
+	overflow hidden
+	text-overflow ellipsis
+.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text, .better-placeholder:focus ~ .better-placeholder-text
+	max-width 110%
+	visibility visible
+	transform scale(.8)
+	transform-origin 0 0
+	color #428bca
+	top -2px
+
+.better-placeholder.disabled, .better-placeholder.disabled ~ .better-placeholder-text
+	color #999
+
+.fa-required
+	margin-left 6px
+	font-size 70%
+	vertical-align super
+
+td.input-group
+	.better-placeholder-text, .help-block.better-placeholder-text
+		top 11px
+	.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text, .better-placeholder:focus ~ .better-placeholder-text
+		top 7px
+
+		/* Inverted css */
+
+.better-placeholder.inverted:focus, .ui-select-bootstrap.dropdown.open .better-placeholder.inverted, .better-placeholder-active.inverted
+	padding-bottom 18px
+	padding-top 6px
+
+.better-placeholder.inverted ~ .better-placeholder-text.inverted, .better-placeholder.inverted ~ .help-block.better-placeholder-text.inverted, .better-placeholder-text.inverted, .help-block.better-placeholder-text.inverte
+	bottom 2px
+	top auto
+
+.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text, .better-placeholder.inverted:focus ~ .better-placeholder-text
+	max-width 110%
+	visibility visible
+	transform scale(.8)
+	transform-origin 0 0
+	color #428bca
+	bottom -8px
+	top auto
+
+td.input-group
+	.better-placeholder.inverted ~ .better-placeholder-text.inverted, .better-placeholder.inverted ~ .help-block.better-placeholder-text.inverted, .better-placeholder-text.inverted, .help-block.better-placeholder-text.inverte
+		top auto
+		bottom 11px
+	.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text, .better-placeholder.inverted:focus ~ .better-placeholder-text
+		top auto
+		bottom 1px
