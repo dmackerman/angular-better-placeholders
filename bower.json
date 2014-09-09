@@ -1,8 +1,9 @@
 {
   "name": "angular-better-placeholders",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
-    "Dave Ackerman <dave@moduscreate.com>"
+    "Dave Ackerman <dave@moduscreate.com>",
+    "SimeonC <https://github.com/SimeonC>"
   ],
   "main": "src/angular-better-placeholders.js",
   "description": "Angular directive for enhanced placeholders that integrate with Bootstrap form fields.",
