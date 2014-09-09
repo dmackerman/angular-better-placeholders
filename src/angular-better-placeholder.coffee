@@ -24,19 +24,25 @@ angular.module('angularBetterPlaceholder', [])
 					)
 				)
 			)
-		if attrs.ngPlaceholder?
-			_placeholder = attrs.ngPlaceholder
-			element.attr 'placeholder', _placeholder
-			attrs.$observe 'ngPlaceholder', (val) ->
-				element.attr 'placeholder', val
-				placeholder.html val
-				if attrs.required then placeholder.append required
-		else if attrs.placeholder? and attrs.placeholder isnt '' then _placeholder = attrs.placeholder
-		else throw "better-placeholder requires an ng-placeholder or placeholder attribute"
-		
 		required = angular.element '<i class="fa fa-asterisk text-danger fa-required"></i>'
-		placeholder = angular.element "<span class='help-block better-placeholder-text'>#{_placeholder}</span>"
+		placeholder = angular.element "<span class='help-block better-placeholder-text'></span>"
 		element.after placeholder
+		
+		placeholder.html attrs.placeholder
+		if not attrs.placeholder? or attrs.placeholder.trim() is '' # if there is no placeholder then don't show the animations
+			placeholder.addClass 'ng-hide'
+			element.removeClass 'better-placeholder'
+		if attrs.required then placeholder.append required
+		attrs.$observe 'placeholder', (val) ->
+			placeholder.html val
+			if attrs.required then placeholder.append required
+			if not val? or val.trim() is '' # if there is no placeholder then don't show the animations
+				placeholder.addClass 'ng-hide'
+				element.removeClass 'better-placeholder'
+			else # if there is a placeholder then make sure the class for the animations is re-added if it's been removed
+				placeholder.removeClass 'ng-hide'
+				element.addClass 'better-placeholder'
+		
 		placeholder.on 'click', -> element[0].focus()
 		
 		attrs.$observe 'required', (val) ->
@@ -44,9 +50,10 @@ angular.module('angularBetterPlaceholder', [])
 			else required.remove()
 		
 		activate = ->
-			element.addClass 'better-placeholder-active'
-			placeholder.addClass 'active'
-			if element.previous()? and element.previous().hasClass 'input-group-btn' then element.previous().addClass 'better-placeholder-button-active'
+			if attrs.placeholder? and attrs.placeholder.trim() isnt ''
+				element.addClass 'better-placeholder-active'
+				placeholder.addClass 'active'
+				if element.previous()? and element.previous().hasClass 'input-group-btn' then element.previous().addClass 'better-placeholder-button-active'
 		deactivate = ->
 			element.removeClass 'better-placeholder-active'
 			placeholder.removeClass 'active'
