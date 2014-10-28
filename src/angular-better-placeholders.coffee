@@ -1,9 +1,15 @@
-# Compile with coffee -c -b --no-header angular-better-placeholder.coffee > angular-better-placeholder.js
+# Compile with coffee -c -b --no-header angular-better-placeholders.coffee > angular-better-placeholders.js
 angular.module('angularBetterPlaceholder', [])
 .directive 'betterPlaceholder', ->
 	restrict: 'C'
 	require: '?ngModel'
 	link: (scope, element, attrs, ngModel) ->
+		if not element.prev then element.prev = ->
+			p = element
+			loop
+				p = p.previousSibling
+				break unless p and p.nodeType isnt 1
+			return p
 		# if ngModel is invalid then it can occur that the viewValue is empty
 		isEmpty = (value= if ngModel and ngModel? then ngModel.$viewValue else element.val()) ->
 			(
@@ -25,7 +31,12 @@ angular.module('angularBetterPlaceholder', [])
 				)
 			)
 		required = angular.element '<i class="fa fa-asterisk text-danger fa-required"></i>'
-		placeholder = angular.element "<span class='help-block better-placeholder-text'></span>"
+		placeholder = angular.element "<label class='help-block better-placeholder-text'></label>"
+		if element.attr('id')? then placeholder.attr 'for', element.attr 'id'
+		else
+			customId = 'placeholderid_' + (Math.random() * 10000000000000000)
+			element.attr 'id', customId
+			placeholder.attr 'for', customId
 		element.after placeholder
 		
 		placeholder.html attrs.placeholder
@@ -53,19 +64,18 @@ angular.module('angularBetterPlaceholder', [])
 			if attrs.placeholder? and attrs.placeholder.trim() isnt ''
 				element.addClass 'better-placeholder-active'
 				placeholder.addClass 'active'
-				if element.previous()? and element.previous().hasClass 'input-group-btn' then element.previous().addClass 'better-placeholder-button-active'
+				if element.prev()? and element.prev().hasClass 'input-group-btn' then element.prev().addClass 'better-placeholder-button-active'
 		deactivate = ->
 			element.removeClass 'better-placeholder-active'
 			placeholder.removeClass 'active'
-			if element.previous()? and element.previous().hasClass 'input-group-btn' then element.previous().removeClass 'better-placeholder-button-active'
+			if element.prev()? and element.prev().hasClass 'input-group-btn' then element.prev().removeClass 'better-placeholder-button-active'
 		
 		# catch changes from the DOM
-		element.on 'focus', activate
 		element.on 'blur', -> if isEmpty() then deactivate()
-		element.on 'change', ->
+		element.on 'change input', ->
 			if isEmpty() then deactivate()
 			else activate()
-		if element.previous()? and element.previous().hasClass 'input-group-btn' then element.previous().addClass 'better-placeholder-button'
+		if element.prev()? and element.prev().hasClass 'input-group-btn' then element.prev().addClass 'better-placeholder-button'
 		if ngModel? then ngModel.$formatters.push (value) ->
 			if isEmpty value then deactivate()
 			else activate()
