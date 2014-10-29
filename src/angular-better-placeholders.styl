@@ -1,4 +1,6 @@
-// compile with stylus -u autoprefixer-stylus -c angular-better-placeholder.styl
+// compile with stylus -u autoprefixer-stylus -c angular-better-placeholders.styl
+
+default-transition-duration = 0.2s
 
 .better-placeholder
 	transition all default-transition-duration ease
@@ -7,15 +9,10 @@
 	&::-webkit-datetime-edit
 		transition all default-transition-duration ease
 		opacity 0
-	&:focus
-		padding-top 18px
-		height auto
-		&::-webkit-datetime-edit
-			opacity 1
 	&.fixed-height
 		padding-top 18px
 		height auto
-		&:not(:focus):not(.better-placeholder-active) ~ .better-placeholder-text:not(.active)
+		&:not(.better-placeholder-active) ~ .better-placeholder-text:not(.active)
 			top 14px
 
 .better-placeholder-active, .ui-select-bootstrap.dropdown.open .better-placeholder
@@ -48,7 +45,7 @@
 	white-space nowrap
 	overflow hidden
 	text-overflow ellipsis
-.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text, .better-placeholder:focus ~ .better-placeholder-text
+.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text
 	max-width 110%
 	visibility visible
 	transform scale(.8)
@@ -67,12 +64,12 @@
 td.input-group
 	.better-placeholder-text, .help-block.better-placeholder-text
 		top 11px
-	.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text, .better-placeholder:focus ~ .better-placeholder-text
+	.better-placeholder-text.active, .better-placeholder-active ~ .better-placeholder-text
 		top 7px
 
 		/* Inverted css */
 
-.better-placeholder.inverted:focus, .ui-select-bootstrap.dropdown.open .better-placeholder.inverted, .better-placeholder-active.inverted
+.ui-select-bootstrap.dropdown.open .better-placeholder.inverted, .better-placeholder-active.inverted
 	padding-bottom 18px
 	padding-top 6px
 
@@ -80,7 +77,7 @@ td.input-group
 	bottom 2px
 	top auto
 
-.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text, .better-placeholder.inverted:focus ~ .better-placeholder-text
+.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text
 	max-width 110%
 	visibility visible
 	transform scale(.8)
@@ -93,6 +90,6 @@ td.input-group
 	.better-placeholder.inverted ~ .better-placeholder-text.inverted, .better-placeholder.inverted ~ .help-block.better-placeholder-text.inverted, .better-placeholder-text.inverted, .help-block.better-placeholder-text.inverte
 		top auto
 		bottom 11px
-	.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text, .better-placeholder.inverted:focus ~ .better-placeholder-text
+	.better-placeholder-text.inverted.active, .better-placeholder-active.inverted ~ .better-placeholder-text
 		top auto
 		bottom 1px
