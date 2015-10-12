@@ -1,3 +1,4 @@
+// version 0.3.0
 angular.module('angularBetterPlaceholder', []).directive('betterPlaceholder', function() {
   return {
     restrict: 'C',

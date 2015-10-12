@@ -1,3 +1,4 @@
+# version 0.3.0
 # Compile with coffee -c -b --no-header angular-better-placeholders.coffee > angular-better-placeholders.js
 angular.module('angularBetterPlaceholder', [])
 .directive 'betterPlaceholder', ->
@@ -38,7 +39,7 @@ angular.module('angularBetterPlaceholder', [])
 			element.attr 'id', customId
 			placeholder.attr 'for', customId
 		element.after placeholder
-		
+
 		placeholder.html attrs.placeholder
 		if not attrs.placeholder? or attrs.placeholder.trim() is '' # if there is no placeholder then don't show the animations
 			placeholder.addClass 'ng-hide'
@@ -53,13 +54,13 @@ angular.module('angularBetterPlaceholder', [])
 			else # if there is a placeholder then make sure the class for the animations is re-added if it's been removed
 				placeholder.removeClass 'ng-hide'
 				element.addClass 'better-placeholder'
-		
+
 		placeholder.on 'click', -> element[0].focus()
-		
+
 		attrs.$observe 'required', (val) ->
 			if val then placeholder.append required
 			else required.remove()
-		
+
 		activate = ->
 			if attrs.placeholder? and attrs.placeholder.trim() isnt ''
 				element.addClass 'better-placeholder-active'
@@ -69,7 +70,7 @@ angular.module('angularBetterPlaceholder', [])
 			element.removeClass 'better-placeholder-active'
 			placeholder.removeClass 'active'
 			if element.prev()? and element.prev().hasClass 'input-group-btn' then element.prev().removeClass 'better-placeholder-button-active'
-		
+
 		# catch changes from the DOM
 		element.on 'blur', -> if isEmpty() then deactivate()
 		element.on 'change input', ->
